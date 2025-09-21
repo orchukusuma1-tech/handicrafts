@@ -1,70 +1,125 @@
-import json
 import streamlit as st
 
-# -------------------
-# Load product data
-# -------------------
-def load_products():
-    with open("products.json", "r") as f:
-        return json.load(f)
+# -------------------------------
+# Embedded product data
+# -------------------------------
+products = [
+    {
+        "id": 1,
+        "name": "Handmade Bamboo Basket",
+        "description": "A strong eco-friendly basket made with love by rural artisans.",
+        "price": 299,
+        "image": "images/basket.jpg",
+        "category": "Basket",
+        "owner": "Anitha Handicrafts",
+        "manager": "Ravi Kumar"
+    },
+    {
+        "id": 2,
+        "name": "Terracotta Vase",
+        "description": "Beautifully crafted terracotta vase, perfect for home decor.",
+        "price": 599,
+        "image": "images/vase.jpg",
+        "category": "Vase",
+        "owner": "Sita Pottery Works",
+        "manager": "Lakshmi Devi"
+    },
+    {
+        "id": 3,
+        "name": "Handwoven Cotton Mat",
+        "description": "Durable and eco-friendly cotton mat, handwoven by village women.",
+        "price": 799,
+        "image": "images/mat.jpg",
+        "category": "Mat",
+        "owner": "Rural Weavers",
+        "manager": "Arjun Rao"
+    }
+]
 
-# -------------------
-# Display product card
-# -------------------
-def display_product(product):
-    st.image(product["image"], width=250)
-    st.subheader(product["name"])
-    st.write(product["description"])
-    st.write(f"💰 Price: ₹{product['price']}")
-    st.write(f"👤 Owner: {product['owner']}")
-    st.write(f"📋 Manager: {product['manager']}")
+# -------------------------------
+# Initialize session state (cart)
+# -------------------------------
+if "cart" not in st.session_state:
+    st.session_state.cart = []
 
-    # Add to Cart button
-    if st.button(f"🛒 Add {product['name']} to Cart", key=product["id"]):
-        st.session_state["cart"].append(product)
-        st.success(f"{product['name']} added to cart!")
+# -------------------------------
+# Add to cart function
+# -------------------------------
+def add_to_cart(product):
+    st.session_state.cart.append(product)
+    st.success(f"{product['name']} added to cart!")
 
-# -------------------
-# Main App
-# -------------------
+# -------------------------------
+# Show cart
+# -------------------------------
+def show_cart():
+    st.header("🛒 Your Cart")
+    if not st.session_state.cart:
+        st.info("Your cart is empty.")
+        return
+
+    total = 0
+    for item in st.session_state.cart:
+        st.image(item["image"], width=150)
+        st.subheader(item["name"])
+        st.write(item["description"])
+        st.write(f"💰 Price: ₹{item['price']}")
+        st.caption(f"Owner: {item['owner']} | Manager: {item['manager']}")
+        total += item["price"]
+        st.write("---")
+
+    st.subheader(f"Total: ₹{total}")
+
+    if st.button("Proceed to Checkout ✅"):
+        st.success("Checkout complete! Thank you for supporting local artisans. 🙏")
+        st.session_state.cart.clear()
+
+# -------------------------------
+# Main UI
+# -------------------------------
 def main():
-    st.title("🛍️ Handicraft Marketplace")
-    st.write("Welcome to our handicraft store! Buy unique handmade products.")
+    st.set_page_config(page_title="Handicrafts Store", layout="wide")
+    st.title("🛍️ Welcome to Handicrafts Store")
 
-    # Initialize cart
-    if "cart" not in st.session_state:
-        st.session_state["cart"] = []
+    menu = ["Home", "Products", "Cart", "About"]
+    choice = st.sidebar.selectbox("Navigate", menu)
 
-    # Load products
-    products = load_products()
+    if choice == "Home":
+        st.header("Discover Authentic Handmade Products")
+        st.write("Browse our collection of eco-friendly and traditional handicrafts.")
 
-    # Sidebar
-    st.sidebar.header("Filters")
-    search = st.sidebar.text_input("🔎 Search Product")
-    categories = ["All"] + list(set([p["category"] for p in products]))
-    selected_category = st.sidebar.selectbox("📂 Category", categories)
+    elif choice == "Products":
+        st.header("Available Products")
 
-    st.sidebar.subheader("🛒 Cart")
-    if st.session_state["cart"]:
-        for item in st.session_state["cart"]:
-            st.sidebar.write(f"- {item['name']} (₹{item['price']})")
-        total = sum([item["price"] for item in st.session_state["cart"]])
-        st.sidebar.write(f"**Total: ₹{total}**")
-        st.sidebar.button("Proceed to Checkout")
-    else:
-        st.sidebar.write("Cart is empty.")
+        # Filter by category
+        categories = ["All"] + sorted(list(set([p["category"] for p in products])))
+        selected_category = st.selectbox("Filter by Category", categories)
 
-    # Filter logic
-    filtered_products = products
-    if search:
-        filtered_products = [p for p in filtered_products if search.lower() in p["name"].lower()]
-    if selected_category != "All":
-        filtered_products = [p for p in filtered_products if p["category"] == selected_category]
+        cols = st.columns(3)
+        for idx, product in enumerate(products):
+            if selected_category == "All" or product["category"] == selected_category:
+                with cols[idx % 3]:
+                    st.image(product["image"], use_container_width=True)
+                    st.subheader(product["name"])
+                    st.write(product["description"])
+                    st.write(f"💰 Price: ₹{product['price']}")
+                    st.caption(f"Owner: {product['owner']} | Manager: {product['manager']}")
+                    if st.button(f"Add to Cart 🛒", key=product["id"]):
+                        add_to_cart(product)
 
-    # Display products
-    for product in filtered_products:
-        st.markdown("---")
-        display_product(product)
+    elif choice == "Cart":
+        show_cart()
 
+    elif choice == "About":
+        st.header("About Us")
+        st.write("""
+        🌸 Our mission is to support rural artisans by bringing their handmade crafts online.  
+        Every purchase directly helps local communities grow and sustain their traditions.  
+        """)
+
+# -------------------------------
+# Run the app
+# -------------------------------
 if __name__ == "__main__":
     main()
+
