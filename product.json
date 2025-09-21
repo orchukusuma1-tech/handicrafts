@@ -1,8 +1,4 @@
-import streamlit as st
 
-# -------------------------------
-# Embedded product data
-# -------------------------------
 products = [
     {
         "id": 1,
@@ -122,4 +118,5 @@ def main():
 # -------------------------------
 if __name__ == "__main__":
     main()
+
 
