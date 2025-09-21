@@ -1,4 +1,11 @@
 import streamlit as st
+import base64
+
+# -------------------------------
+# Embedded product images (base64)
+# -------------------------------
+basket_img = "data:image/png;base64,iVBORw0KGgoAAAANSUhE..."  # full base64 string here
+vase_img = "data:image/png;base64,iVBORw0KGgoAAAANSUhE..."    # full base64 string here
 
 # -------------------------------
 # Embedded product data
@@ -9,7 +16,7 @@ products = [
         "name": "Handmade Bamboo Basket",
         "description": "A strong eco-friendly basket made with love by rural artisans.",
         "price": 299,
-        "image": "images/basket.jpg",
+        "image": basket_img,
         "category": "Basket",
         "owner": "Anitha Handicrafts",
         "manager": "Ravi Kumar"
@@ -19,20 +26,10 @@ products = [
         "name": "Terracotta Vase",
         "description": "Beautifully crafted terracotta vase, perfect for home decor.",
         "price": 599,
-        "image": "images/vase.jpg",
+        "image": vase_img,
         "category": "Vase",
         "owner": "Sita Pottery Works",
         "manager": "Lakshmi Devi"
-    },
-    {
-        "id": 3,
-        "name": "Handwoven Cotton Mat",
-        "description": "Durable and eco-friendly cotton mat, handwoven by village women.",
-        "price": 799,
-        "image": "images/mat.jpg",
-        "category": "Mat",
-        "owner": "Rural Weavers",
-        "manager": "Arjun Rao"
     }
 ]
 
