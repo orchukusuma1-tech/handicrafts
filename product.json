@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Handmade Bamboo Basket",
+    "description": "A strong eco-friendly basket made with love by rural artisans.",
+    "price": 299,
+    "image": "images/basket.jpg",
+    "category": "Basket",
+    "owner": "Anitha Handicrafts",
+    "manager": "Ravi Kumar"
+  },
+  {
+    "id": 2,
+    "name": "Terracotta Vase",
+    "description": "Beautifully crafted terracotta vase, perfect for home decor.",
+    "price": 599,
+    "image": "images/vase.jpg",
+    "category": "Vase",
+    "owner": "Sita Pottery Works",
+    "manager": "Lakshmi Devi"
+  },
+  {
+    "id": 3,
+    "name": "Handwoven Cotton Mat",
+    "description": "Durable and eco-friendly cotton mat, handwoven by village women.",
+    "price": 799,
+    "image": "images/mat.jpg",
+    "category": "Mat",
+    "owner": "Rural Weavers",
+    "manager": "Arjun Rao"
+  }
+]
