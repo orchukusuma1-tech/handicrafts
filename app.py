@@ -10,7 +10,7 @@ products = [
         "name": "Handmade Bamboo Basket",
         "description": "A strong eco-friendly basket made with love by rural artisans.",
         "price": 299,
-        "image": r"C:\Users\orchu\OneDrive\Pictures\Screenshots\Screenshot 2025-09-21 174247.png",  
+        "image":  "images/basket.png",  
         "category": "Basket",
         "owner": "Anitha Handicrafts",
         "manager": "Ravi Kumar"
@@ -20,7 +20,7 @@ products = [
         "name": "Terracotta Vase",
         "description": "Beautifully crafted terracotta vase, perfect for home decor.",
         "price": 599,
-        "image":  r"C:\Users\orchu\OneDrive\Pictures\Screenshots\Screenshot 2025-09-21 174425.png",
+        "image": "images/vase.png",
         "category": "Vase",
         "owner": "Sita Pottery Works",
         "manager": "Lakshmi Devi"
@@ -123,4 +123,5 @@ def main():
 # -------------------------------
 if __name__ == "__main__":
     main()
+
 
