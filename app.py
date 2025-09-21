@@ -10,7 +10,7 @@ products = [
         "name": "Handmade Bamboo Basket",
         "description": "A strong eco-friendly basket made with love by rural artisans.",
         "price": 299,
-        "st.image":  "C:\Users\orchu\OneDrive\Desktop\images\basket.png.png",  
+        "st.image": "C:\Users\orchu\OneDrive\Desktop\images\basket.png.png",  
         "category": "Basket",
         "owner": "Anitha Handicrafts",
         "manager": "Ravi Kumar"
@@ -123,6 +123,7 @@ def main():
 # -------------------------------
 if __name__ == "__main__":
     main()
+
 
 
 
